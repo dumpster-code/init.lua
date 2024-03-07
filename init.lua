@@ -9,8 +9,8 @@ vim.wo.relativenumber = true
 ----------------------------------------- Code Navigation -----------------------------------------
 
 -- Focus cursor in middle when scrolling
-vim.api.nvim_set_keymap('n', '<C-d>', 'zz<C-d>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-u>', 'zz<C-u>', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-d>', 'zz<C-d>')
+vim.keymap.set('n', '<C-u>', 'zz<C-u>')
 
 -- Focus cursor in middle when searching
 vim.keymap.set("n", "n", "nzzzv")
@@ -20,10 +20,10 @@ vim.keymap.set("n", "N", "Nzzzv")
 vim.opt.scrolloff = 15
 
 -- Window navigations
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
+vim.keymap.set('n', '<C-h>', '<C-w>h')
+vim.keymap.set('n', '<C-j>', '<C-w>j')
+vim.keymap.set('n', '<C-k>', '<C-w>k')
+vim.keymap.set('n', '<C-l>', '<C-w>l')
 
 ------------------------------------------ Code Editing ------------------------------------------
 
@@ -66,4 +66,19 @@ vim.opt.updatetime = 50
 -- Format
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
 
-----------------------------------------------------------------------------------------------------
+------------------------------------------- Telescope -------------------------------------------
+
+vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>')
+vim.keymap.set('n', '<leader>fa', ':Telescope find_files follow=true no_ignore=true hidden=true<CR>')
+vim.keymap.set('n', '<leader>fw', ':Telescope live_grep<CR>')
+vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
+vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<CR>')
+vim.keymap.set('n', '<leader>fo', ':Telescope oldfiles<CR>')
+vim.keymap.set('n', '<leader>fz', ':Telescope current_buffer_fuzzy_find<CR>')
+vim.keymap.set('n', '<leader>cm', ':Telescope git_commits<CR>')
+vim.keymap.set('n', '<leader>gt', ':Telescope git_status<CR>')
+vim.keymap.set('n', '<leader>pt', ':Telescope terms<CR>')
+vim.keymap.set('n', '<leader>th', ':Telescope themes<CR>')
+vim.keymap.set('n', '<leader>ma', ':Telescope marks<CR>')
+
+------------------------------------------------------------------------------------------------
