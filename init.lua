@@ -6,12 +6,6 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.wo.number = true
 vim.wo.relativenumber = true
 
--- Window navigations
-vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
-
 ----------------------------------------- Code Navigation -----------------------------------------
 
 -- Focus cursor in middle when scrolling
@@ -22,6 +16,14 @@ vim.api.nvim_set_keymap('n', '<C-u>', 'zz<C-u>', {noremap = true, silent = true}
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+-- Never have less than X number of lines below or above
+vim.opt.scrolloff = 15
+
+-- Window navigations
+vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-j>', '<C-w>j', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-k>', '<C-w>k', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<C-l>', '<C-w>l', {noremap = true, silent = true})
 
 ------------------------------------------ Code Editing ------------------------------------------
 
@@ -48,6 +50,16 @@ vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
+
+-- No line wrapping
+vim.opt.wrap = false
+
+-- Modify Searches
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+
+-- Fast Updates
+vim.opt.updatetime = 50
 
 ---------------------------------------------- LSP ----------------------------------------------
 
