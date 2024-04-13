@@ -57,22 +57,33 @@ vim.api.nvim_set_keymap(
 )
 
 return {
-	"akinsho/bufferline.nvim",
-	version = "*",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
-	event = "BufReadPre",
-	opts = {
-		options = {
-			offsets = {
-				{
-					filetype = "NvimTree",
-				},
-			},
-			numbers = function(opts)
-				return opts.ordinal
-			end,
+  "akinsho/bufferline.nvim",
+  event = "VeryLazy",
+  keys = {
+    { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+    { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+    { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+    { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
+    { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+  },
+  opts = {
+    options = {
+      -- stylua: ignore
+      close_command = function(n) require("mini.bufremove").delete(n, false) end,
+      -- stylua: ignore
+      right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+      diagnostics = "nvim_lsp",
+      always_show_bufferline = false,
+		offsets = {
+		{
+			filetype = "NvimTree",
+			highlight = "Directory",
+			text_align = "left",
 		},
+		},
+		numbers = function(opts)
+			return opts.ordinal
+		end,
 	},
+	}	
 }

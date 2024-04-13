@@ -1,7 +1,7 @@
 --  To update plugins, you can run
 --    :Lazy update
 require("lazy").setup({
-	{ "tpope/vim-sleuth" }, -- Detect tabstop and shiftwidth automatically
+	-- { "tpope/vim-sleuth" }, -- Detect tabstop and shiftwidth automatically
 
 	-- NOTE: Plugins can also be added by using a table,
 	-- with the first argument being the link and the following
@@ -13,16 +13,16 @@ require("lazy").setup({
 	--    require('Comment').setup({})
 
 	-- "gc" to comment visual regions/lines
-	{ "numToStr/Comment.nvim", opts = {} },
-	{ "nvim-tree/nvim-web-devicons", opts = {} },
+	-- { "numToStr/Comment.nvim", opts = {} },
+	
 	-- modular approach: using `require 'path/name'` will
 	-- include a plugin definition from file lua/path/name.lua
 
 	require("plugins/autopairs"),
 	require("plugins/bufferline"),
-	require("plugins/bufremove"),
 	require("plugins/cmp"),
-	require("plugins/conform"),
+	--require("plugins/conform"),
+	require("plugins/dev-icons"),
 	require("plugins/gitsigns"),
 	require("plugins/lspconfig"),
 	require("plugins/lualine"),
@@ -32,6 +32,7 @@ require("lazy").setup({
 	require("plugins/todo_comments"),
 	require("plugins/tokyonight"),
 	require("plugins/treesitter"),
+	require("plugins/undotree"),
 	require("plugins/which_key"),
 
 	-- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
