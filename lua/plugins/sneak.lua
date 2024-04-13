@@ -1,5 +1,3 @@
 return {
-    {
-        'justinmk/vim-sneak',
-    }
+    'justinmk/vim-sneak',
 }
