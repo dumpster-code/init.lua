@@ -1,3 +1,11 @@
+-- Define a Lua function to execute the commands
+function switch_source_header()
+	-- Execute ClangdSwitchSourceHeader command
+	vim.api.nvim_command("ClangdSwitchSourceHeader")
+	vim.api.nvim_command("ClangdSwitchSourceHeader")
+	require("mini.bufremove").delete(0, true)
+end
+
 return {
 	{ -- LSP Configuration & Plugins
 		"neovim/nvim-lspconfig",
@@ -102,6 +110,9 @@ return {
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+
+					-- Map the Lua function to <leader>ls using the custom map function
+					map('<leader>ls', ':lua switch_source_header()<CR>', "Switch Header/Source File")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.

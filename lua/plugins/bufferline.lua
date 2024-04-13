@@ -65,6 +65,7 @@ return {
     { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
     { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
     { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
+	{ "<leader>bx", function() require("mini.bufremove").delete(0, true) end, desc = "Delete Buffer (Force)" },
   },
   opts = {
     options = {

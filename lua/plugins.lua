@@ -28,6 +28,7 @@ require("lazy").setup({
 	require("plugins/lualine"),
 	require("plugins/mini"),
 	require("plugins/nvim_tree"),
+	require("plugins/sneak"),
 	require("plugins/telescope"),
 	require("plugins/todo_comments"),
 	require("plugins/tokyonight"),
