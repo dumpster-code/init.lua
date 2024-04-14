@@ -1,8 +1,19 @@
-function switch_source_header()
-	vim.api.nvim_command("ClangdSwitchSourceHeader")
-	vim.api.nvim_command("w")
-	vim.api.nvim_command("ClangdSwitchSourceHeader")
-	require("mini.bufremove").delete(0, true)
+local __previous_line = {}
+
+function switchSourceHeader()
+    local file_name = vim.fn.expand("%:t")
+    __previous_line[file_name] = vim.fn.line('.')
+    
+    vim.api.nvim_command("ClangdSwitchSourceHeader")
+    vim.api.nvim_command("w")
+
+    vim.api.nvim_command("ClangdSwitchSourceHeader")
+    require("mini.bufremove").delete(0, true)
+
+    vim.defer_fn(function()
+		local previous_line = __previous_line[vim.fn.expand("%:t")] or 1
+        vim.api.nvim_command("normal " .. previous_line .. "G")
+    end, 0)
 end
 
 return {
@@ -48,12 +59,6 @@ return {
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
-					-- NOTE: Remember that lua is a real programming language, and as such it is possible
-					-- to define small helper and utility functions so you don't have to repeat yourself
-					-- many times.
-					--
-					-- In this case, we create a function that lets us more easily define mappings specific
-					-- for LSP related items. It sets the mode, buffer and description for us each time.
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
@@ -104,7 +109,7 @@ return {
 					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- Map the Lua function to <leader>ls using the custom map function
-					map('<leader>ls', ':lua switch_source_header()<CR>', "Switch Header/Source File")
+					map('<leader>ls', ':lua switchSourceHeader()<CR>', "Switch Header/Source File")
 
 					-- The following two autocommands are used to highlight references of the
 					-- word under your cursor when your cursor rests there for a little while.
@@ -132,16 +137,6 @@ return {
 			--  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
-
-			-- Enable the following language servers
-			--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-			--
-			--  Add any additional override configuration in the following tables. Available keys are:
-			--  - cmd (table): Override the default command used to start the server
-			--  - filetypes (table): Override the default list of associated filetypes for the server
-			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-			--  - settings (table): Override the default settings passed when initializing the server.
-			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 			
 			-- Setup language servers.
 			local lspconfig = require('lspconfig')
