@@ -14,6 +14,7 @@ require("lazy").setup({
 	require("plugins/sneak"),
 	require("plugins/telescope"),
 	require("plugins/todo_comments"),
+	require("plugins/toggle_term"),
 	require("plugins/tokyonight"),
 	require("plugins/treesitter"),
 	require("plugins/undotree"),
